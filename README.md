@@ -170,22 +170,4 @@ Answer:"""
 
 ---
 
-## 🎓 7. College Viva Cheat Sheet (Q&A)
 
-### Q1: Why use `all-MiniLM-L6-v2`?
-> **Answer:** `all-MiniLM-L6-v2` is a lightweight, distilled Sentence-Transformer model. It has 6 layers, outputs 384-dimensional embeddings, runs fast on CPUs without requiring a GPU, and strikes an optimal trade-off between semantic retrieval quality and latency for real-time document search.
-
-### Q2: How does Semantic Search differ from TF-IDF?
-> **Answer:**
-> - **TF-IDF (Lexical):** Matches exact keywords based on term frequency and inverse document frequency. It fails on synonyms (e.g., query "automobile" misses a passage about "cars") and ignores word order/context.
-> - **Dense Semantic Search:** Captures latent semantic meaning and context in vector space. Even if the query and passage share zero keywords, they can have high cosine similarity if their meaning is similar.
-
-### Q3: How do you handle edge cases?
-> **Answer:**
-> 1. **Empty / missing documents:** Returns 0 indexed and logs a warning; search returns an empty list without crashing.
-> 2. **Blank queries:** Checked via `.strip()`; returns empty results immediately without unnecessary model computation.
-> 3. **Invalid chunks:** Filtered out (skips non-dicts, empty strings, missing text fields).
-> 4. **$k > \text{total chunks}$:** Automatically clamped to `min(k, len(chunks))` to avoid index out-of-range errors or dummy padding.
-
-### Q4: Why is preserving page metadata essential in RAG?
-> **Answer:** RAG systems suffer from hallucinations. Providing verifiable citations (e.g., *[Page 12]*) allows users and evaluators to verify the answer against original source documents.
