@@ -1,4 +1,6 @@
-# DocuMind — Module 2: Embeddings & Semantic Search
+# DocuMind — Module 2: Embeddings & Semantic Search (`documind-semantic-search`)
+
+> **NLP semantic retrieval using Sentence Transformers, FAISS, and TF-IDF for a document question-answering system.**
 
 **Project:** DocuMind — Document Question Answering System using RAG  
 **Assigned Person:** Person 2 (Embeddings, Indexing & Semantic Retrieval)  
