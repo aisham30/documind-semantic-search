@@ -1,3 +1,7 @@
+# DocuMind - Person 1: PDF Processing & Ingestion Dependencies
+PyMuPDF>=1.24,<2.0
+pytest>=8.0,<10.0
+
 # DocuMind - Person 2: Embeddings & Semantic Search Dependencies
 sentence-transformers>=2.2.2
 faiss-cpu>=1.7.4
