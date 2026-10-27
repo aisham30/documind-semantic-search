@@ -6,8 +6,13 @@ seamlessly feed into Person 2's DocumentRetriever.build_index() and allow
 semantic search and citation page tracking without errors.
 """
 
+import os
 from pathlib import Path
 import pytest
+
+# Ensure HuggingFace loads cached model offline without waiting for network timeout
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 from backend.pdf_processor import process_pdf
 from retriever import DocumentRetriever, _DEPS_AVAILABLE
