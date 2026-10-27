@@ -141,19 +141,3 @@ This runs the full pipeline: PDF ingestion -> FAISS vector indexing -> Semantic 
 
 ---
 
-## 🎓 6. Academic Viva & Interview Questions (Person 1)
-
-#### Q1: Why did you choose PyMuPDF over PyPDF2 or pdfplumber?
-> **Answer:** PyMuPDF (`fitz`) is built on MuPDF, a high-performance C rendering library. It is 10–20× faster than pure Python libraries like PyPDF2, handles complex font encodings accurately, supports text extraction in natural reading order (`sort=True`), and gives precise page-level metadata.
-
-#### Q2: Why is it critical that chunks do not span across page boundaries?
-> **Answer:** In a RAG question-answering system, trustworthy citations are essential. If a chunk spanned from the bottom of Page 2 to the top of Page 3, any answer generated from that chunk would have ambiguous source attribution. By constraining chunks within individual pages, every chunk maps to exactly one page number, making citations 100% verifiable.
-
-#### Q3: Why is Unicode NFC normalization important in NLP preprocessing?
-> **Answer:** PDF fonts often encode characters as combining code points (e.g., base letter 'e' followed by combining acute accent `\u0301`) rather than precomposed characters ('é', `\u00e9`). Without NFC normalization, vector embedding tokenizers (like WordPiece or Byte-Pair Encoding in SentenceTransformers) would tokenize identical words into different subword tokens, degrading retrieval performance.
-
-#### Q4: How do you handle scanned or image-only PDFs?
-> **Answer:** PyMuPDF extracts embedded text layers. If a PDF contains only scanned raster images, `extract_pdf_pages()` detects that zero text was extracted across all pages and raises `EmptyPDFError` with an explicit message indicating that an Optical Character Recognition (OCR) engine (such as Tesseract) is required.
-
-#### Q5: How was the chunk size (1,200 characters) and overlap (180 characters) chosen?
-> **Answer:** In English, 1,200 characters corresponds to approximately 180–220 words (about 1–2 paragraphs). This fits comfortably within the 256-word token limit of `all-MiniLM-L6-v2` without truncation. An overlap of 180 characters (~15%) ensures semantic continuity across chunk splits so that key context at boundaries is not lost during dense retrieval.
